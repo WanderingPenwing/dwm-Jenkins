@@ -3,6 +3,7 @@
 /* appearance */
 static const unsigned int borderpx  = 6;		/* border pixel of windows */
 static const unsigned int gappx     = 6;
+static const unsigned int CORNER_RADIUS = 24;
 static const unsigned int snap	  	= 32;	   /* snap pixel */
 static const int showbar			= 1;		/* 0 means no bar */
 static const int topbar			 	= 1;		/* 0 means bottom bar */
@@ -13,7 +14,7 @@ static unsigned int borderalpha	 	= OPAQUE;
 static const char col_bg[]		  	= "#222222";
 static const char col_fg[]		  	= "#cccccc";
 static const char col_fga[]		 	= "#eeeeee";
-static const char col_bga[]		 	= "#3fb36d";
+static const char col_bga[]		 	= "#318d56"; //#3fb36d
 static const char *colors[][3]	  	= {
 	/*			   fg		 bg		 border   */
 	[SchemeNorm] = { col_fg,	col_bg,		col_bg 	},
@@ -21,7 +22,7 @@ static const char *colors[][3]	  	= {
 };
 
 /* tagging */
-static const char *tags[] = { "   ", "   ", "   ", "   ", "   ", "   "};
+static const char *tags[] = { "   ", "   ", "   ", "   ", " 5 ", " 6 ", " 7 ", " 8 ", " 9 "};
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -31,9 +32,9 @@ static const Rule rules[] = {
 	/* class	  				instance	title	   	tags mask	isfloating  monitor */
 	{ "Chromium-browser",  		NULL,	   	NULL,	   	0,	    	0,		   	-1},
 	{ "Jellyfin Media Player",  NULL,	   	NULL,	 	0,	    	0,		   	-1},
-	{ "calcifer",  				NULL,	   	NULL,	 1<<3,	    	0,		   	-1},
-	{ "jiji",  					NULL,	   	NULL,	 1<<5,	    	0,		   	-1},
-	{ "discord",  				NULL,	   	NULL,	 1<<5,	    	0,		   	-1},
+	{ "calcifer",  				NULL,	   	NULL,	 1<<2,	    	0,		   	-1},
+	{ "jiji",  					NULL,	   	NULL,	 1<<3,	    	0,		   	-1},
+	{ "discord",  				NULL,	   	NULL,	 1<<3,	    	0,		   	-1},
 };
 
 /* layout(s) */
@@ -44,8 +45,8 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 
 static const Layout layouts[] = {
 	/* symbol	 arrange function */
-	{ "[]=",	  tile },	/* first entry is default */
-	{ "[M]",	  monocle },
+	{ "   ",	  tile },	/* first entry is default */
+	{ "   ",	  monocle },
 };
 
 /* key definitions */
@@ -63,8 +64,8 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] 	= { "/home/penwing/nixos/scripts/dmenu_launcher.sh", NULL };
 static const char *termcmd[]  	= { "kodama", NULL };
-static const char *chromium[]  	= { "chromium --wm-window-animations-disabled --animation-duration-scale=0", NULL };
-static const char *screenlock[] = { "betterlockscreen -l", NULL };
+static const char *chromium[]  	= { "chromium", "--wm-window-animations-disabled", "--animation-duration-scale=0", NULL };
+static const char *screenlock[] = { "betterlockscreen", "-l", NULL };
 
 
 static const Key keys[] = {
@@ -104,15 +105,16 @@ static const Key keys[] = {
 /* button definitions */
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
 static const Button buttons[] = {
-	/* click				event mask	  button		  function		argument */
-	{ ClkLtSymbol,		  0,			  Button1,		setlayout,	  {0} },
+	/* click				event mask	  button		function		argument */
+	{ ClkLtSymbol,		  	0,			  Button1,		setlayout,	  	{0} },
+	{ ClkTagBar,			0,			  Button1,		view,		   	{0} },
 	// { ClkLtSymbol,		  0,			  Button3,		setlayout,	  {.v = &layouts[2]} },
 	// { ClkWinTitle,		  0,			  Button2,		zoom,		   {0} },
 	// { ClkStatusText,		0,			  Button2,		spawn,		  {.v = termcmd } },
 	// { ClkClientWin,		 MODKEY,		 Button1,		movemouse,	  {0} },
 	// { ClkClientWin,		 MODKEY,		 Button2,		togglefloating, {0} },
 	// { ClkClientWin,		 MODKEY,		 Button3,		resizemouse,	{0} },
-	// { ClkTagBar,			0,			  Button1,		view,		   {0} },
+	// 
 	// { ClkTagBar,			0,			  Button3,		toggleview,	 {0} },
 	// { ClkTagBar,			MODKEY,		 Button1,		tag,			{0} },
 	// { ClkTagBar,			MODKEY,		 Button3,		toggletag,	  {0} },

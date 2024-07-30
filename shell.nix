@@ -8,6 +8,7 @@ pkgs.mkShell {
     pkgs.xorg.libX11
     pkgs.xorg.libXft
     pkgs.xorg.libXinerama
+    pkgs.xorg.libXext
     pkgs.fontconfig
     pkgs.freetype
   ];
