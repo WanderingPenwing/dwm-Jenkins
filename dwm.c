@@ -190,7 +190,7 @@ static void monocle(Monitor *m);
 static void motionnotify(XEvent *e);
 //static void movemouse(const Arg *arg);
 static Client *nexttiled(Client *c);
-//static void pop(Client *c);
+static void pop(Client *c);
 static void propertynotify(XEvent *e);
 static void quit(const Arg *arg);
 static Monitor *recttomon(int x, int y, int w, int h);
@@ -241,7 +241,7 @@ static int xerror(Display *dpy, XErrorEvent *ee);
 static int xerrordummy(Display *dpy, XErrorEvent *ee);
 static int xerrorstart(Display *dpy, XErrorEvent *ee);
 static void xinitvisual();
-//static void zoom(const Arg *arg);
+static void zoom(const Arg *arg);
 
 /* variables */
 static const char broken[] = "broken";
@@ -1228,14 +1228,14 @@ nexttiled(Client *c)
 	return c;
 }
 
-// void
-// pop(Client *c)
-// {
-// 	detach(c);
-// 	attach(c);
-// 	focus(c);
-// 	arrange(c->mon);
-// }
+void
+pop(Client *c)
+{
+	detach(c);
+	attach(c);
+	focus(c);
+	arrange(c->mon);
+}
 
 void
 propertynotify(XEvent *e)
@@ -2208,17 +2208,17 @@ xinitvisual()
 	}
 }
 
-// void
-// zoom(const Arg *arg)
-// {
-// 	Client *c = selmon->sel;
-// 
-// 	if (!selmon->lt[selmon->sellt]->arrange || !c || c->isfloating)
-// 		return;
-// 	if (c == nexttiled(selmon->clients) && !(c = nexttiled(c->next)))
-// 		return;
-// 	pop(c);
-// }
+void
+zoom(const Arg *arg)
+{
+	Client *c = selmon->sel;
+
+	if (!selmon->lt[selmon->sellt]->arrange || !c || c->isfloating)
+		return;
+	if (c == nexttiled(selmon->clients) && !(c = nexttiled(c->next)))
+		return;
+	pop(c);
+}
 
 int
 main(int argc, char *argv[])
