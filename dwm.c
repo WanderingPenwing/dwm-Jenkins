@@ -188,15 +188,15 @@ static void mappingnotify(XEvent *e);
 static void maprequest(XEvent *e);
 static void monocle(Monitor *m);
 static void motionnotify(XEvent *e);
-static void movemouse(const Arg *arg);
+//static void movemouse(const Arg *arg);
 static Client *nexttiled(Client *c);
-static void pop(Client *c);
+//static void pop(Client *c);
 static void propertynotify(XEvent *e);
 static void quit(const Arg *arg);
 static Monitor *recttomon(int x, int y, int w, int h);
 static void resize(Client *c, int x, int y, int w, int h, int interact);
 static void resizeclient(Client *c, int x, int y, int w, int h);
-static void resizemouse(const Arg *arg);
+//static void resizemouse(const Arg *arg);
 static void restack(Monitor *m);
 static void run(void);
 static void scan(void);
@@ -205,8 +205,9 @@ static void sendmon(Client *c, Monitor *m);
 static void setclientstate(Client *c, long state);
 static void setfocus(Client *c);
 static void setfullscreen(Client *c, int fullscreen);
-static void fullscreen(const Arg *arg);
-static void setgaps(const Arg *arg);
+//static void fullscreen(const Arg *arg);
+static void togglefullscreen(const Arg *arg);
+//static void setgaps(const Arg *arg);
 static void setlayout(const Arg *arg);
 static void setmfact(const Arg *arg);
 static void setup(void);
@@ -216,8 +217,8 @@ static void spawn(const Arg *arg);
 static void tag(const Arg *arg);
 static void tagmon(const Arg *arg);
 static void tile(Monitor *m);
-static void togglebar(const Arg *arg);
-static void togglefloating(const Arg *arg);
+//static void togglebar(const Arg *arg);
+//static void togglefloating(const Arg *arg);
 static void toggletag(const Arg *arg);
 static void toggleview(const Arg *arg);
 static void unfocus(Client *c, int setfocus);
@@ -240,7 +241,7 @@ static int xerror(Display *dpy, XErrorEvent *ee);
 static int xerrordummy(Display *dpy, XErrorEvent *ee);
 static int xerrorstart(Display *dpy, XErrorEvent *ee);
 static void xinitvisual();
-static void zoom(const Arg *arg);
+//static void zoom(const Arg *arg);
 
 /* variables */
 static const char broken[] = "broken";
@@ -286,6 +287,14 @@ static Colormap cmap;
 
 /* compile-time check if all tags fit into an unsigned int bit array. */
 struct NumTags { char limitexceeded[LENGTH(tags) > 31 ? -1 : 1]; };
+
+void togglefullscreen(const Arg *arg) {
+    Client *c = selmon->sel;  // Get the currently focused client
+    if (!c) return;  // Exit if there is no focused client
+
+    // Toggle fullscreen state
+    setfullscreen(c, !c->isfullscreen);
+}
 
 /* function implementations */
 void
@@ -717,8 +726,8 @@ void
 drawbar(Monitor *m)
 {
 	int x, w, tw = 0;
-	int boxs = drw->fonts->h / 9;
-	int boxw = drw->fonts->h / 6 + 2;
+	//int boxs = drw->fonts->h / 9;
+	//int boxw = drw->fonts->h / 6 + 2;
 	unsigned int i, occ = 0, urg = 0;
 	Client *c;
 
@@ -1152,65 +1161,65 @@ motionnotify(XEvent *e)
 	mon = m;
 }
 
-void
-movemouse(const Arg *arg)
-{
-	int x, y, ocx, ocy, nx, ny;
-	Client *c;
-	Monitor *m;
-	XEvent ev;
-	Time lasttime = 0;
-
-	if (!(c = selmon->sel))
-		return;
-	if (c->isfullscreen) /* no support moving fullscreen windows by mouse */
-		return;
-	restack(selmon);
-	ocx = c->x;
-	ocy = c->y;
-	if (XGrabPointer(dpy, root, False, MOUSEMASK, GrabModeAsync, GrabModeAsync,
-		None, cursor[CurMove]->cursor, CurrentTime) != GrabSuccess)
-		return;
-	if (!getrootptr(&x, &y))
-		return;
-	do {
-		XMaskEvent(dpy, MOUSEMASK|ExposureMask|SubstructureRedirectMask, &ev);
-		switch(ev.type) {
-		case ConfigureRequest:
-		case Expose:
-		case MapRequest:
-			handler[ev.type](&ev);
-			break;
-		case MotionNotify:
-			if ((ev.xmotion.time - lasttime) <= (1000 / 60))
-				continue;
-			lasttime = ev.xmotion.time;
-
-			nx = ocx + (ev.xmotion.x - x);
-			ny = ocy + (ev.xmotion.y - y);
-			if (abs(selmon->wx - nx) < snap)
-				nx = selmon->wx;
-			else if (abs((selmon->wx + selmon->ww) - (nx + WIDTH(c))) < snap)
-				nx = selmon->wx + selmon->ww - WIDTH(c);
-			if (abs(selmon->wy - ny) < snap)
-				ny = selmon->wy;
-			else if (abs((selmon->wy + selmon->wh) - (ny + HEIGHT(c))) < snap)
-				ny = selmon->wy + selmon->wh - HEIGHT(c);
-			if (!c->isfloating && selmon->lt[selmon->sellt]->arrange
-			&& (abs(nx - c->x) > snap || abs(ny - c->y) > snap))
-				togglefloating(NULL);
-			if (!selmon->lt[selmon->sellt]->arrange || c->isfloating)
-				resize(c, nx, ny, c->w, c->h, 1);
-			break;
-		}
-	} while (ev.type != ButtonRelease);
-	XUngrabPointer(dpy, CurrentTime);
-	if ((m = recttomon(c->x, c->y, c->w, c->h)) != selmon) {
-		sendmon(c, m);
-		selmon = m;
-		focus(NULL);
-	}
-}
+// void
+// movemouse(const Arg *arg)
+// {
+// 	int x, y, ocx, ocy, nx, ny;
+// 	Client *c;
+// 	Monitor *m;
+// 	XEvent ev;
+// 	Time lasttime = 0;
+// 
+// 	if (!(c = selmon->sel))
+// 		return;
+// 	if (c->isfullscreen) /* no support moving fullscreen windows by mouse */
+// 		return;
+// 	restack(selmon);
+// 	ocx = c->x;
+// 	ocy = c->y;
+// 	if (XGrabPointer(dpy, root, False, MOUSEMASK, GrabModeAsync, GrabModeAsync,
+// 		None, cursor[CurMove]->cursor, CurrentTime) != GrabSuccess)
+// 		return;
+// 	if (!getrootptr(&x, &y))
+// 		return;
+// 	do {
+// 		XMaskEvent(dpy, MOUSEMASK|ExposureMask|SubstructureRedirectMask, &ev);
+// 		switch(ev.type) {
+// 		case ConfigureRequest:
+// 		case Expose:
+// 		case MapRequest:
+// 			handler[ev.type](&ev);
+// 			break;
+// 		case MotionNotify:
+// 			if ((ev.xmotion.time - lasttime) <= (1000 / 60))
+// 				continue;
+// 			lasttime = ev.xmotion.time;
+// 
+// 			nx = ocx + (ev.xmotion.x - x);
+// 			ny = ocy + (ev.xmotion.y - y);
+// 			if (abs(selmon->wx - nx) < snap)
+// 				nx = selmon->wx;
+// 			else if (abs((selmon->wx + selmon->ww) - (nx + WIDTH(c))) < snap)
+// 				nx = selmon->wx + selmon->ww - WIDTH(c);
+// 			if (abs(selmon->wy - ny) < snap)
+// 				ny = selmon->wy;
+// 			else if (abs((selmon->wy + selmon->wh) - (ny + HEIGHT(c))) < snap)
+// 				ny = selmon->wy + selmon->wh - HEIGHT(c);
+// 			if (!c->isfloating && selmon->lt[selmon->sellt]->arrange
+// 			&& (abs(nx - c->x) > snap || abs(ny - c->y) > snap))
+// 				togglefloating(NULL);
+// 			if (!selmon->lt[selmon->sellt]->arrange || c->isfloating)
+// 				resize(c, nx, ny, c->w, c->h, 1);
+// 			break;
+// 		}
+// 	} while (ev.type != ButtonRelease);
+// 	XUngrabPointer(dpy, CurrentTime);
+// 	if ((m = recttomon(c->x, c->y, c->w, c->h)) != selmon) {
+// 		sendmon(c, m);
+// 		selmon = m;
+// 		focus(NULL);
+// 	}
+// }
 
 Client *
 nexttiled(Client *c)
@@ -1219,14 +1228,14 @@ nexttiled(Client *c)
 	return c;
 }
 
-void
-pop(Client *c)
-{
-	detach(c);
-	attach(c);
-	focus(c);
-	arrange(c->mon);
-}
+// void
+// pop(Client *c)
+// {
+// 	detach(c);
+// 	attach(c);
+// 	focus(c);
+// 	arrange(c->mon);
+// }
 
 void
 propertynotify(XEvent *e)
@@ -1304,62 +1313,62 @@ resizeclient(Client *c, int x, int y, int w, int h)
 	XSync(dpy, False);
 }
 
-void
-resizemouse(const Arg *arg)
-{
-	int ocx, ocy, nw, nh;
-	Client *c;
-	Monitor *m;
-	XEvent ev;
-	Time lasttime = 0;
-
-	if (!(c = selmon->sel))
-		return;
-	if (c->isfullscreen) /* no support resizing fullscreen windows by mouse */
-		return;
-	restack(selmon);
-	ocx = c->x;
-	ocy = c->y;
-	if (XGrabPointer(dpy, root, False, MOUSEMASK, GrabModeAsync, GrabModeAsync,
-		None, cursor[CurResize]->cursor, CurrentTime) != GrabSuccess)
-		return;
-	XWarpPointer(dpy, None, c->win, 0, 0, 0, 0, c->w + c->bw - 1, c->h + c->bw - 1);
-	do {
-		XMaskEvent(dpy, MOUSEMASK|ExposureMask|SubstructureRedirectMask, &ev);
-		switch(ev.type) {
-		case ConfigureRequest:
-		case Expose:
-		case MapRequest:
-			handler[ev.type](&ev);
-			break;
-		case MotionNotify:
-			if ((ev.xmotion.time - lasttime) <= (1000 / 60))
-				continue;
-			lasttime = ev.xmotion.time;
-
-			nw = MAX(ev.xmotion.x - ocx - 2 * c->bw + 1, 1);
-			nh = MAX(ev.xmotion.y - ocy - 2 * c->bw + 1, 1);
-			if (c->mon->wx + nw >= selmon->wx && c->mon->wx + nw <= selmon->wx + selmon->ww
-			&& c->mon->wy + nh >= selmon->wy && c->mon->wy + nh <= selmon->wy + selmon->wh)
-			{
-				if (!c->isfloating && selmon->lt[selmon->sellt]->arrange
-				&& (abs(nw - c->w) > snap || abs(nh - c->h) > snap))
-					togglefloating(NULL);
-			}
-			if (!selmon->lt[selmon->sellt]->arrange || c->isfloating)
-				resize(c, c->x, c->y, nw, nh, 1);
-			break;
-		}
-	} while (ev.type != ButtonRelease);
-	XWarpPointer(dpy, None, c->win, 0, 0, 0, 0, c->w + c->bw - 1, c->h + c->bw - 1);
-	XUngrabPointer(dpy, CurrentTime);
-	while (XCheckMaskEvent(dpy, EnterWindowMask, &ev));
-	if ((m = recttomon(c->x, c->y, c->w, c->h)) != selmon) {
-		sendmon(c, m);
-		selmon = m;
-		focus(NULL);
-	}
-}
+// void
+// resizemouse(const Arg *arg)
+// {
+// 	int ocx, ocy, nw, nh;
+// 	Client *c;
+// 	Monitor *m;
+// 	XEvent ev;
+// 	Time lasttime = 0;
+// 
+// 	if (!(c = selmon->sel))
+// 		return;
+// 	if (c->isfullscreen) /* no support resizing fullscreen windows by mouse */
+// 		return;
+// 	restack(selmon);
+// 	ocx = c->x;
+// 	ocy = c->y;
+// 	if (XGrabPointer(dpy, root, False, MOUSEMASK, GrabModeAsync, GrabModeAsync,
+// 		None, cursor[CurResize]->cursor, CurrentTime) != GrabSuccess)
+// 		return;
+// 	XWarpPointer(dpy, None, c->win, 0, 0, 0, 0, c->w + c->bw - 1, c->h + c->bw - 1);
+// 	do {
+// 		XMaskEvent(dpy, MOUSEMASK|ExposureMask|SubstructureRedirectMask, &ev);
+// 		switch(ev.type) {
+// 		case ConfigureRequest:
+// 		case Expose:
+// 		case MapRequest:
+// 			handler[ev.type](&ev);
+// 			break;
+// 		case MotionNotify:
+// 			if ((ev.xmotion.time - lasttime) <= (1000 / 60))
+// 				continue;
+// 			lasttime = ev.xmotion.time;
+// 
+// 			nw = MAX(ev.xmotion.x - ocx - 2 * c->bw + 1, 1);
+// 			nh = MAX(ev.xmotion.y - ocy - 2 * c->bw + 1, 1);
+// 			if (c->mon->wx + nw >= selmon->wx && c->mon->wx + nw <= selmon->wx + selmon->ww
+// 			&& c->mon->wy + nh >= selmon->wy && c->mon->wy + nh <= selmon->wy + selmon->wh)
+// 			{
+// 				if (!c->isfloating && selmon->lt[selmon->sellt]->arrange
+// 				&& (abs(nw - c->w) > snap || abs(nh - c->h) > snap))
+// 					togglefloating(NULL);
+// 			}
+// 			if (!selmon->lt[selmon->sellt]->arrange || c->isfloating)
+// 				resize(c, c->x, c->y, nw, nh, 1);
+// 			break;
+// 		}
+// 	} while (ev.type != ButtonRelease);
+// 	XWarpPointer(dpy, None, c->win, 0, 0, 0, 0, c->w + c->bw - 1, c->h + c->bw - 1);
+// 	XUngrabPointer(dpy, CurrentTime);
+// 	while (XCheckMaskEvent(dpy, EnterWindowMask, &ev));
+// 	if ((m = recttomon(c->x, c->y, c->w, c->h)) != selmon) {
+// 		sendmon(c, m);
+// 		selmon = m;
+// 		focus(NULL);
+// 	}
+// }
 
 void
 restack(Monitor *m)
@@ -1514,28 +1523,28 @@ setfullscreen(Client *c, int fullscreen)
 	}
 }
 
-void
-setgaps(const Arg *arg)
-{
-	if ((arg->i == 0) || (selmon->gappx + arg->i < 0))
-		selmon->gappx = 0;
-	else
-		selmon->gappx += arg->i;
-	arrange(selmon);
-}
+// void
+// setgaps(const Arg *arg)
+// {
+// 	if ((arg->i == 0) || (selmon->gappx + arg->i < 0))
+// 		selmon->gappx = 0;
+// 	else
+// 		selmon->gappx += arg->i;
+// 	arrange(selmon);
+// }
 
 Layout *last_layout;
-void
-fullscreen(const Arg *arg)
-{
-	if (selmon->showbar) {
-		for(last_layout = (Layout *)layouts; last_layout != selmon->lt[selmon->sellt]; last_layout++);
-		setlayout(&((Arg) { .v = &layouts[2] }));
-	} else {
-		setlayout(&((Arg) { .v = last_layout }));
-	}
-	togglebar(arg);
-}
+// void
+// fullscreen(const Arg *arg)
+// {
+// 	if (selmon->showbar) {
+// 		for(last_layout = (Layout *)layouts; last_layout != selmon->lt[selmon->sellt]; last_layout++);
+// 		setlayout(&((Arg) { .v = &layouts[2] }));
+// 	} else {
+// 		setlayout(&((Arg) { .v = last_layout }));
+// 	}
+// 	togglebar(arg);
+// }
 
 void
 setlayout(const Arg *arg)
@@ -1744,28 +1753,28 @@ tile(Monitor *m)
 		}
 }
 
-void
-togglebar(const Arg *arg)
-{
-	selmon->showbar = !selmon->showbar;
-	updatebarpos(selmon);
-	XMoveResizeWindow(dpy, selmon->barwin, selmon->wx, selmon->by, selmon->ww, bh);
-	arrange(selmon);
-}
+// void
+// togglebar(const Arg *arg)
+// {
+// 	selmon->showbar = !selmon->showbar;
+// 	updatebarpos(selmon);
+// 	XMoveResizeWindow(dpy, selmon->barwin, selmon->wx, selmon->by, selmon->ww, bh);
+// 	arrange(selmon);
+// }
 
-void
-togglefloating(const Arg *arg)
-{
-	if (!selmon->sel)
-		return;
-	if (selmon->sel->isfullscreen) /* no support for fullscreen windows */
-		return;
-	selmon->sel->isfloating = !selmon->sel->isfloating || selmon->sel->isfixed;
-	if (selmon->sel->isfloating)
-		resize(selmon->sel, selmon->sel->x, selmon->sel->y,
-			selmon->sel->w, selmon->sel->h, 0);
-	arrange(selmon);
-}
+// void
+// togglefloating(const Arg *arg)
+// {
+// 	if (!selmon->sel)
+// 		return;
+// 	if (selmon->sel->isfullscreen) /* no support for fullscreen windows */
+// 		return;
+// 	selmon->sel->isfloating = !selmon->sel->isfloating || selmon->sel->isfixed;
+// 	if (selmon->sel->isfloating)
+// 		resize(selmon->sel, selmon->sel->x, selmon->sel->y,
+// 			selmon->sel->w, selmon->sel->h, 0);
+// 	arrange(selmon);
+// }
 
 void
 toggletag(const Arg *arg)
@@ -2199,17 +2208,17 @@ xinitvisual()
 	}
 }
 
-void
-zoom(const Arg *arg)
-{
-	Client *c = selmon->sel;
-
-	if (!selmon->lt[selmon->sellt]->arrange || !c || c->isfloating)
-		return;
-	if (c == nexttiled(selmon->clients) && !(c = nexttiled(c->next)))
-		return;
-	pop(c);
-}
+// void
+// zoom(const Arg *arg)
+// {
+// 	Client *c = selmon->sel;
+// 
+// 	if (!selmon->lt[selmon->sellt]->arrange || !c || c->isfloating)
+// 		return;
+// 	if (c == nexttiled(selmon->clients) && !(c = nexttiled(c->next)))
+// 		return;
+// 	pop(c);
+// }
 
 int
 main(int argc, char *argv[])
