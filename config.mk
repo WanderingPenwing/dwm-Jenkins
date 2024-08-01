@@ -1,5 +1,5 @@
 # dwm version
-VERSION = 6.5
+VERSION = "pendragon-1.6"
 
 # Customize below to fit your system
 
