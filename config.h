@@ -64,7 +64,6 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] 	= { "/home/penwing/nixos/scripts/dmenu_launcher.sh", NULL };
 static const char *termcmd[]  	= { "kodama", NULL };
 static const char *chromium[]  	= { "chromium", "--wm-window-animations-disabled", "--animation-duration-scale=0", NULL };
-static const char *screenlock[] = { "betterlockscreen", "-l", NULL };
 
 
 static const Key keys[] = {
@@ -72,7 +71,6 @@ static const Key keys[] = {
 	{ MODKEY,				XK_d,	  		spawn,		  	{.v = dmenucmd } 	},
 	{ MODKEY,			 	XK_Return, 		spawn,		  	{.v = termcmd } 	},
 	{ MODKEY,			 	XK_i, 			spawn,		  	{.v = chromium } 	},
-	{ MODKEY,			 	XK_twosuperior, spawn,		  	{.v = screenlock } 	},
 	{ MODKEY,               XK_space,      	setlayout,  	{0} 				},
 	{ MODKEY,             	XK_f,      		togglefullscreen, {0} 				},
 	{ MODKEY,				XK_less,	  	focusstack,	 	{.i = -1 } 			},
