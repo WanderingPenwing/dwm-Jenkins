@@ -65,7 +65,7 @@ static const char *dmenucmd[] 	= { "/home/penwing/nixos/scripts/dmenu_launcher.s
 static const char *termcmd[]  	= { "kodama", NULL };
 static const char *chromium[]  	= { "chromium", "--wm-window-animations-disabled", "--animation-duration-scale=0", NULL };
 
-
+#include "movestack.c"
 static const Key keys[] = {
 	/* modifier				key				function		argument */
 	{ MODKEY,				XK_d,	  		spawn,		  	{.v = dmenucmd } 	},
@@ -75,6 +75,8 @@ static const Key keys[] = {
 	{ MODKEY,             	XK_f,      		togglefullscreen, {0} 				},
 	{ MODKEY,				XK_Down,	  	focusstack,	 	{.i = +1 } 			},
 	{ MODKEY,				XK_Up,	  		focusstack,	 	{.i = -1 } 			},
+	{ MODKEY|ShiftMask,		XK_Down,	  	movestack,	 	{.i = +1 } 			},
+	{ MODKEY|ShiftMask,		XK_Up,	  		movestack,	 	{.i = -1 } 			},
 	{ MODKEY,				XK_F12,	  		incnmaster,	 	{.i = +1 } 			},
 	{ MODKEY,				XK_F11,	  		incnmaster,	 	{.i = -1 } 			},
 	{ MODKEY,				XK_exclam,	  	zoom,	 		{0} 				},
@@ -97,7 +99,7 @@ static const Key keys[] = {
 	{ MODKEY,			 	XK_F7, 			spawn,		  	SHCMD("~/nixos/scripts/susuwatari/client.sh") 	},
 	{ MODKEY,			 	XK_F8, 			spawn,		  	SHCMD("~/nixos/scripts/hdmi_paint.sh") 	},
 	{ MODKEY,			 	XK_F9, 			spawn,		  	SHCMD("~/nixos/scripts/screen_sleep.sh") 	},
-	{ ShiftMask,			XK_Print,		spawn,			SHCMD("maim --select \"/home/penwing/Pictures/screenshots/$(date '+%Y_%m_%d %H:%M:%S').png\"")		},
+	{ MODKEY,				XK_Print,		spawn,			SHCMD("maim --select \"/home/penwing/Pictures/screenshots/$(date '+%Y_%m_%d %H:%M:%S').png\"")		},
 	TAGKEYS(	XK_ampersand,	0)
 	TAGKEYS(	XK_eacute,		1)
 	TAGKEYS(	XK_quotedbl,	2)
