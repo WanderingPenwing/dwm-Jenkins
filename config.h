@@ -77,11 +77,11 @@ static const Key keys[] = {
 	{ MODKEY,				XK_Up,	  		focusstack,	 	{.i = -1 } 			},
 	{ MODKEY|ShiftMask,		XK_Down,	  	movestack,	 	{.i = +1 } 			},
 	{ MODKEY|ShiftMask,		XK_Up,	  		movestack,	 	{.i = -1 } 			},
+	{ MODKEY|ShiftMask,		XK_Left,	  	setmfact,	   	{.f = -0.05} 		},
+	{ MODKEY|ShiftMask,		XK_Right,	 	setmfact,	   	{.f = +0.05} 		},
 	{ MODKEY,				XK_F12,	  		incnmaster,	 	{.i = +1 } 			},
 	{ MODKEY,				XK_F11,	  		incnmaster,	 	{.i = -1 } 			},
 	{ MODKEY,				XK_exclam,	  	zoom,	 		{0} 				},
-	{ MODKEY,				XK_Left,	  	setmfact,	   	{.f = -0.05} 		},
-	{ MODKEY,				XK_Right,	 	setmfact,	   	{.f = +0.05} 		},
 	{ MODKEY|ShiftMask,		XK_a,	  		killclient,	 	{0} 				},
 	{ MODKEY,				XK_Tab,	  		view,		   	{.ui = ~0 } 		},
 	{ MODKEY|ShiftMask,		XK_Tab,	  		tag,			{.ui = ~0 } 		},
@@ -99,7 +99,7 @@ static const Key keys[] = {
 	{ MODKEY,			 	XK_F7, 			spawn,		  	SHCMD("~/nixos/scripts/susuwatari/client.sh") 	},
 	{ MODKEY,			 	XK_F8, 			spawn,		  	SHCMD("~/nixos/scripts/hdmi_paint.sh") 	},
 	{ MODKEY,			 	XK_F9, 			spawn,		  	SHCMD("~/nixos/scripts/screen_sleep.sh") 	},
-	{ MODKEY,				XK_Print,		spawn,			SHCMD("maim --select \"/home/penwing/Pictures/screenshots/$(date '+%Y_%m_%d %H:%M:%S').png\"")		},
+	{ MODKEY,				XK_Print,		spawn,			SHCMD("~/nixos/scripts/screenshot.sh")		},
 	TAGKEYS(	XK_ampersand,	0)
 	TAGKEYS(	XK_eacute,		1)
 	TAGKEYS(	XK_quotedbl,	2)
