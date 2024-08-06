@@ -1,5 +1,5 @@
 # dwm version
-VERSION = "pendragon-1.8"
+VERSION = "pendragon-1.9"
 
 # Customize below to fit your system
 
