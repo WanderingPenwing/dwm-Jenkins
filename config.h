@@ -100,6 +100,8 @@ static const Key keys[] = {
 	{ MODKEY,			 	XK_F8, 			spawn,		  	SHCMD("~/nixos/scripts/hdmi_paint.sh") 	},
 	{ MODKEY,			 	XK_F9, 			spawn,		  	SHCMD("~/nixos/scripts/screen_sleep.sh") 	},
 	{ MODKEY,				XK_Print,		spawn,			SHCMD("~/nixos/scripts/screenshot.sh")		},
+	{ MODKEY,				XK_t,			spawn,			SHCMD("~/nixos/scripts/task_manager.sh")		},
+	{ MODKEY,				XK_n,			spawn,			SHCMD("~/nixos/scripts/notes.sh")		},
 	TAGKEYS(	XK_ampersand,	0)
 	TAGKEYS(	XK_eacute,		1)
 	TAGKEYS(	XK_quotedbl,	2)
