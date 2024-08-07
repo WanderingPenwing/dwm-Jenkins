@@ -104,6 +104,8 @@ static const Key keys[] = {
 	{ MODKEY,				XK_n,			spawn,			SHCMD("~/nixos/scripts/notes.sh")		},
 	{ MODKEY,				XK_k,			spawn,			SHCMD("~/nixos/scripts/code.sh")		},
 	{ MODKEY,				XK_s,			spawn,			SHCMD("~/nixos/scripts/susuwatari_call.sh")		},
+	{ MODKEY,				XK_b,			spawn,			SHCMD("~/nixos/scripts/bookmarks_get.sh")		},
+	{ MODKEY|ShiftMask,		XK_b,			spawn,			SHCMD("~/nixos/scripts/bookmarks_add.sh")		},
 	TAGKEYS(	XK_ampersand,	0)
 	TAGKEYS(	XK_eacute,		1)
 	TAGKEYS(	XK_quotedbl,	2)
