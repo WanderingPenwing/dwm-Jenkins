@@ -28,9 +28,7 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class	  				instance	title	   	tags mask	isfloating  monitor */
-	{ "chromium-browser",  		NULL,	   	NULL,	   	0,	    	0,		   	-1},
-	{ "jellyfinmediaplayer",  	NULL,	   	NULL,	 	0,	    	0,		   	-1},
+	/* class	  				instance	title	   	tags mask	isfloating  monitor */		   	-1},
 	{ "calcifer",  				NULL,	   	NULL,	 1<<2,	    	0,		   	-1},
 	{ "jiji",  					NULL,	   	NULL,	 1<<3,	    	0,		   	-1},
 	{ "discord",  				NULL,	   	NULL,	 1<<3,	    	0,		   	-1},
@@ -63,14 +61,14 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] 	= { "/home/penwing/nixos/scripts/dmenu_launcher.sh", NULL };
 static const char *termcmd[]  	= { "kodama", NULL };
-static const char *chromium[]  	= { "chromium", "--wm-window-animations-disabled", "--animation-duration-scale=0", NULL };
+static const char *browser[]  	= { "/home/penwing/nixos/scripts/browser.sh", NULL };
 
 #include "movestack.c"
 static const Key keys[] = {
 	/* modifier				key				function		argument */
 	{ MODKEY,				XK_d,	  		spawn,		  	{.v = dmenucmd } 	},
 	{ MODKEY,			 	XK_Return, 		spawn,		  	{.v = termcmd } 	},
-	{ MODKEY,			 	XK_i, 			spawn,		  	{.v = chromium } 	},
+	{ MODKEY,			 	XK_i, 			spawn,		  	{.v = browser } 	},
 	{ MODKEY,               XK_space,      	setlayout,  	{0} 				},
 	{ MODKEY,             	XK_f,      		togglefullscreen, {0} 				},
 	{ MODKEY,				XK_Down,	  	focusstack,	 	{.i = +1 } 			},
