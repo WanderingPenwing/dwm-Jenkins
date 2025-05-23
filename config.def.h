@@ -71,23 +71,23 @@ static const Key keys[] = {
 	{ MODKEY,			 	XK_i, 			spawn,		  	{.v = browser } 	},
 	{ MODKEY,               XK_space,      	setlayout,  	{0} 				},
 	{ MODKEY,             	XK_f,      		togglefullscreen, {0} 				},
-	{ MODKEY,				XK_Down,	  	focusstack,	 	{.i = +1 } 			},
-	{ MODKEY,				XK_Up,	  		focusstack,	 	{.i = -1 } 			},
-	{ MODKEY|ShiftMask,		XK_Down,	  	movestack,	 	{.i = +1 } 			},
-	{ MODKEY|ShiftMask,		XK_Up,	  		movestack,	 	{.i = -1 } 			},
-	{ MODKEY|ShiftMask,		XK_Left,	  	setmfact,	   	{.f = -0.05} 		},
-	{ MODKEY|ShiftMask,		XK_Right,	 	setmfact,	   	{.f = +0.05} 		},
+	{ MODKEY,				XK_j,	  		focusstack,	 	{.i = +1 } 			},
+	{ MODKEY,				XK_k,	  		focusstack,	 	{.i = -1 } 			},
+	{ MODKEY|ShiftMask,		XK_j,	  		movestack,	 	{.i = +1 } 			},
+	{ MODKEY|ShiftMask,		XK_k,	  		movestack,	 	{.i = -1 } 			},
+	{ MODKEY|ShiftMask,		XK_h,		  	setmfact,	   	{.f = -0.05} 		},
+	{ MODKEY|ShiftMask,		XK_l,		 	setmfact,	   	{.f = +0.05} 		},
 	{ MODKEY,				XK_F12,	  		incnmaster,	 	{.i = +1 } 			},
 	{ MODKEY,				XK_F11,	  		incnmaster,	 	{.i = -1 } 			},
-	{ MODKEY,				XK_exclam,	  	zoom,	 		{0} 				},
-	{ MODKEY|ShiftMask,		XK_a,	  		killclient,	 	{0} 				},
+	{ MODKEY,				XK_z,	  		zoom,	 		{0} 				},
+	{ MODKEY|ShiftMask,		XK_q,	  		killclient,	 	{0} 				},
 	{ MODKEY,				XK_Tab,	  		view,		   	{.ui = ~0 } 		},
 	{ MODKEY|ShiftMask,		XK_Tab,	  		tag,			{.ui = ~0 } 		},
 	{ MODKEY,				XK_comma,  		focusmon,	   	{.i = -1 } 			},
-	{ MODKEY,				XK_semicolon, 	focusmon,	   	{.i = +1 } 			},
+	{ MODKEY,				XK_dot,		 	focusmon,	   	{.i = +1 } 			},
 	{ MODKEY|ShiftMask,		XK_comma,  		tagmon,		 	{.i = -1 } 			},
-	{ MODKEY|ShiftMask,		XK_semicolon, 	tagmon,		 	{.i = +1 } 			},
-	{ MODKEY|ShiftMask,		XK_q,	  		quit,		   	{0} 				},
+	{ MODKEY|ShiftMask,		XK_dot, 		tagmon,		 	{.i = +1 } 			},
+	//{ MODKEY|ShiftMask,		XK_,	  		quit,		   	{0} 				},
 	{ MODKEY,			 	XK_F1, 			spawn,		  	SHCMD("pamixer -t && notify-send -u normal -a \"volume\" \"$(pamixer --get-volume-human)\"") 	},
 	{ MODKEY,			 	XK_F2, 			spawn,		  	SHCMD("pamixer -d 5 -u && notify-send -u normal -a \"volume\" \"$(pamixer --get-volume-human)\"") 	},
 	{ MODKEY,			 	XK_F3, 			spawn,		  	SHCMD("pamixer -i 5 -u && notify-send -u normal -a \"volume\" \"$(pamixer --get-volume-human)\"") 	},
@@ -97,7 +97,7 @@ static const Key keys[] = {
 	{ MODKEY,			 	XK_F7, 			spawn,		  	SHCMD("$HOME/nixos/scripts/susuwatari/client.sh") 	},
 	{ MODKEY,			 	XK_F8, 			spawn,		  	SHCMD("$HOME/nixos/scripts/hdmi_paint.sh") 	},
 	{ MODKEY,			 	XK_F9, 			spawn,		  	SHCMD("$HOME/nixos/scripts/screen_sleep.sh") 	},
-	{ MODKEY,				XK_Print,		spawn,			SHCMD("$HOME/nixos/scripts/screenshot.sh")		},
+	{ MODKEY,				XK_Escape,		spawn,			SHCMD("$HOME/nixos/scripts/screenshot.sh")		},
 	{ MODKEY,				XK_t,			spawn,			SHCMD("$HOME/nixos/scripts/task_manager.sh")		},
 	{ MODKEY,				XK_n,			spawn,			SHCMD("$HOME/nixos/scripts/notes.sh")		},
 	{ MODKEY,				XK_k,			spawn,			SHCMD("$HOME/nixos/scripts/code.sh")		},
@@ -105,15 +105,15 @@ static const Key keys[] = {
 	{ MODKEY,				XK_b,			spawn,			SHCMD("$HOME/nixos/scripts/bookmarks_get.sh")		},
 	{ MODKEY|ShiftMask,		XK_b,			spawn,			SHCMD("$HOME/nixos/scripts/bookmarks_add.sh")		},
 	{ MODKEY,				XK_p,			spawn,			SHCMD("$HOME/nixos/scripts/pass_get.sh")		},
-	TAGKEYS(	XK_ampersand,	0)
-	TAGKEYS(	XK_eacute,		1)
-	TAGKEYS(	XK_quotedbl,	2)
-	TAGKEYS(	XK_apostrophe,	3)
-	TAGKEYS(	XK_parenleft,	4)
-	TAGKEYS(	XK_minus,		5)
-	TAGKEYS(	XK_egrave,		6)
-	TAGKEYS(	XK_underscore,	7)
-	TAGKEYS(	XK_ccedilla,	8)
+	TAGKEYS(	XK_1,	0)
+	TAGKEYS(	XK_2,	1)
+	TAGKEYS(	XK_3,	2)
+	TAGKEYS(	XK_4,	3)
+	TAGKEYS(	XK_5,	4)
+	TAGKEYS(	XK_6,	5)
+	TAGKEYS(	XK_7,	6)
+	TAGKEYS(	XK_8,	7)
+	TAGKEYS(	XK_9,	8)
 };
 
 /* button definitions */
