@@ -87,12 +87,12 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_period, 		tagmon,		 	{.i = +1 } 			},
 	//{ MODKEY|ShiftMask,		XK_,	  		quit,		   	{0} 				},
 	{ MODKEY,			 	XK_0, 			spawn,		  	SHCMD("pamixer -t && notify-send -u normal -a \"volume\" \"$(pamixer --get-volume-human)\"") 	},
-	{ MODKEY,			 	XK_minus, 			spawn,		  	SHCMD("pamixer -d 5 -u && notify-send -u normal -a \"volume\" \"$(pamixer --get-volume-human)\"") 	},
-	{ MODKEY,			 	XK_plus, 			spawn,		  	SHCMD("pamixer -i 5 -u && notify-send -u normal -a \"volume\" \"$(pamixer --get-volume-human)\"") 	},
-	{ MODKEY,			 	XK_bracketleft, 			spawn,		  	SHCMD("brightnessctl -d \"amdgpu_bl1\" set 10%- && notify-send -u normal -a \"brightness\" \"$(brightnessctl -d 'amdgpu_bl1' get)\"") 	},
-	{ MODKEY,			 	XK_bracketright, 			spawn,		  	SHCMD("brightnessctl -d \"amdgpu_bl1\" set +10% && notify-send -u normal -a \"brightness\" \"$(brightnessctl -d 'amdgpu_bl1' get)\"") 	},
+	{ MODKEY,			 	XK_minus, 		spawn,		  	SHCMD("pamixer -d 5 -u && notify-send -u normal -a \"volume\" \"$(pamixer --get-volume-human)\"") 	},
+	{ MODKEY,			 	XK_equal, 		spawn,		  	SHCMD("pamixer -i 5 -u && notify-send -u normal -a \"volume\" \"$(pamixer --get-volume-human)\"") 	},
+	{ MODKEY,			 	XK_bracketleft, spawn,		  	SHCMD("brightnessctl -d \"amdgpu_bl1\" set 10%- && notify-send -u normal -a \"brightness\" \"$(brightnessctl -d 'amdgpu_bl1' get)\"") 	},
+	{ MODKEY,			 	XK_bracketright, spawn,		  	SHCMD("brightnessctl -d \"amdgpu_bl1\" set +10% && notify-send -u normal -a \"brightness\" \"$(brightnessctl -d 'amdgpu_bl1' get)\"") 	},
 	{ MODKEY,			 	XK_u, 			spawn,		  	SHCMD("$HOME/nixos/scripts/usb_guest.sh") 	},
-	{ MODKEY,			 	XK_h, 			spawn,		  	SHCMD("$HOME/nixos/scripts/hdmi_paint.sh") 	},
+	{ MODKEY,			 	XK_p, 			spawn,		  	SHCMD("$HOME/nixos/scripts/hdmi_paint.sh") 	},
 	{ MODKEY,			 	XK_s, 			spawn,		  	SHCMD("$HOME/nixos/scripts/screen_sleep.sh") 	},
 	{ MODKEY,				XK_Escape,		spawn,			SHCMD("$HOME/nixos/scripts/screenshot.sh")		},
 	{ MODKEY,				XK_t,			spawn,			SHCMD("$HOME/nixos/scripts/task_manager.sh")		},
@@ -102,6 +102,8 @@ static const Key keys[] = {
 	{ MODKEY,				XK_b,			spawn,			SHCMD("$HOME/nixos/scripts/bookmarks_get.sh")		},
 	{ MODKEY|ShiftMask,		XK_b,			spawn,			SHCMD("$HOME/nixos/scripts/bookmarks_add.sh")		},
 	{ MODKEY,				XK_slash,		spawn,			SHCMD("$HOME/nixos/scripts/help.sh")		},
+	{ MODKEY,				XK_Delete,		spawn,			SHCMD("$HOME/nixos/scripts/kill.sh")		},
+	{ MODKEY,				XK_c,			spawn,			SHCMD("$HOME/nixos/scripts/calc.sh")		},
 	TAGKEYS(	XK_1,	0)
 	TAGKEYS(	XK_2,	1)
 	TAGKEYS(	XK_3,	2)
