@@ -1,5 +1,5 @@
 # dwm version
-VERSION = "pendragon-1.9.4"
+VERSION = "jenkins-1.9.8"
 
 # Customize below to fit your system
 
