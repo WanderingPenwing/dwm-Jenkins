@@ -16,10 +16,24 @@ static const char col_bg[]		  	= "#222222";
 static const char col_fg[]		  	= "#cccccc";
 static const char col_fga[]		 	= "#eeeeee";
 static const char col_bga[]		 	= "#318d56"; //#3fb36d
+static const char col_alr[]		 	= "#ff5555"; 
+static const char col_alg[]		 	= "#5fd38d"; 
+static const char col_alo[]		 	= "#ff9955"; 
+static const char col_alb[]		 	= "#3771c8"; 
+static const char col_alp[]		 	= "#bc5fd3"; 
+static const char col_alc[]		 	= "#5fd3bc"; 
+static const char col_algr[]		= "#999999"; 
 static const char *colors[][3]	  	= {
 	/*			   fg		 bg		 border   */
 	[SchemeNorm] = { col_fg,	col_bg,		col_bg 	},
 	[SchemeSel]  = { col_fga,   col_bga,   	col_bga	},
+	[SchemeRed]  = { col_fg,	col_alr,	col_alr	},
+	[SchemeGre]  = { col_fg,	col_alg,   	col_alg	},
+	[SchemeOra]  = { col_fg,	col_alo,   	col_alo	},
+	[SchemeBlu]  = { col_fg,	col_alb,   	col_alb	},
+	[SchemePur]  = { col_fg,	col_alp,   	col_alp	},
+	[SchemeCya]  = { col_fg,	col_alc,   	col_alc	},
+	[SchemeGra]  = { col_fg,	col_algr, 	col_algr},
 };
 
 /* tagging */
