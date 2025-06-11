@@ -28,8 +28,8 @@ static const char *colors[][3]	  	= {
 	[SchemeOra]  = { col_alo,	col_bg,   	col_bg	},
 	[SchemeBlu]  = { col_alb,	col_bg,   	col_bg	},
 	[SchemeIRed]  = { col_bg,	col_alr,   	col_alr	},
-	[SchemrIOra]  = { col_bg,	col_alo,   	col_alo	},
-	[SchemeIblu]  = { col_bg,	col_alb, 	col_alb },
+	[SchemeIOra]  = { col_bg,	col_alo,   	col_alo	},
+	[SchemeIBlu]  = { col_bg,	col_alb, 	col_alb },
 };
 
 /* tagging */
