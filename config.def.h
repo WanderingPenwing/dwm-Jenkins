@@ -16,14 +16,15 @@ static const char col_bg[]		  	= "#222222";
 static const char col_fg[]		  	= "#cccccc";
 static const char col_fga[]		 	= "#eeeeee";
 static const char col_bga[]		 	= "#318d56"; //#3fb36d
-static const char col_alr[]		 	= "#9f272b"; 
+static const char col_alg[]		 	= "#38a061"; //#3fb36d
+static const char col_alr[]		 	= "#c83937"; 
 static const char col_alo[]		 	= "#ff9955"; 
 static const char col_alb[]		 	= "#3771c8"; 
 static const char *colors[][3]	  	= {
 	/*			   fg		 bg		 border   */
 	[SchemeNorm] = { col_fg,	col_bg,		col_bg 	},
 	[SchemeSel]  = { col_fga,   col_bga,   	col_bga	},
-	[SchemeGre]  = { col_bga,	col_bg,   	col_bg	},
+	[SchemeGre]  = { col_alg,	col_bg,   	col_bg	},
 	[SchemeRed]  = { col_alr,	col_bg,		col_bg	},
 	[SchemeOra]  = { col_alo,	col_bg,   	col_bg	},
 	[SchemeBlu]  = { col_alb,	col_bg,   	col_bg	},
